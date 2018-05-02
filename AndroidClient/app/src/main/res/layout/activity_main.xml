@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textAllCaps="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#176CEC"
+        android:textStyle="bold" />
+
+
+   <AutoCompleteTextView
+       android:id="@+id/autodemo"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:hint="Enter Wifi Name" />
+
+
+      <EditText
+          android:id="@+id/wifi_password"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:hint="Enter Wifi Password" />
+
+
+      <Button
+          android:id="@+id/key_button"
+          android:layout_width="wrap_content"
+          android:layout_height="35dp"
+          android:layout_marginTop="30dp"
+          android:layout_gravity="center"
+          android:text="Send" />
+
+
+      <TextView
+          android:id="@+id/pi_response"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="30dp"
+          android:text="Raspberry Pi Response"
+          android:textAlignment="center"/>
+
+
+  </LinearLayout>
