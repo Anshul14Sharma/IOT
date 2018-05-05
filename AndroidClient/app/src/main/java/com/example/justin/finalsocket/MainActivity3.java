@@ -62,14 +62,11 @@ public class MainActivity3 extends AppCompatActivity {
             protected String doInBackground(String... params) {
                 String responce = null;
                 try {
-                    //EditText et = (EditText) findViewById(R.id.editText1);
-                    //String str = et.getText().toString();
                     socket = new Socket(params[0], 8081);
                     PrintWriter outToserver = new PrintWriter(
                             new OutputStreamWriter(
                                     socket.getOutputStream()));
                     outToserver.print(params[1]);
-                    // outToserver.print("IP"+params[1]);
                     outToserver.flush();
 
                     InputStream input = socket.getInputStream();
@@ -189,12 +186,6 @@ public class MainActivity3 extends AppCompatActivity {
                 } catch (NumberFormatException e) {
                     Log.i("",text6+"is not a number");
                 }
-                /*if(!(text1.equals("") || text2.equals("") || (text3.equals("")))){
-                    if (!(isDigits(text1) && isDigits(text2) && isDigits(text3))) {
-                        Toast.makeText(MainActivity3.this, "Enter numeric value", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }*/
 
                 final String wp = "t"+","+session.getText().toString() + ',' + acquistion.getText().toString() + ',' + upload.getText().toString();
                 //new SendMessage().execute(newAddress, wp);
@@ -219,9 +210,6 @@ public class MainActivity3 extends AppCompatActivity {
                 reset.setEnabled(true);
                 new ConnectionTask().execute(newAddress,"e");
                 toastMsg("Stopped!");
-                //    Intent intent2 = new Intent(MainActivity2.this, MainActivity.class);
-                //   startActivity(intent2);
-
             }
 
             public void toastMsg(String msg) {
@@ -234,9 +222,6 @@ public class MainActivity3 extends AppCompatActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //  ipAdd.getText().clear();
-                //port.getText().clear();
-                //   session.getText().clear();
                 send.setEnabled(true);
                 reset.setEnabled(false);
                 stop.setEnabled(true);

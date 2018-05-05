@@ -45,27 +45,10 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
         Button temp = (Button) findViewById(R.id.temperature);
         Button humid = (Button) findViewById(R.id.humidity);
-  //      final EditText ipAdd = (EditText) findViewById(R.id.ip);
-        //final EditText port = (EditText)findViewById(R.id.port);
-  /*      final EditText session = (EditText) findViewById(R.id.session_id);
-        final EditText acquistion = (EditText) findViewById(R.id.acq_freq);
-        final EditText upload = (EditText) findViewById(R.id.upload_freq);
-
-
-        Button send = (Button) findViewById(R.id.send_button);
-        final Button stop = (Button) findViewById(R.id.stop_button);
-        Button reset = (Button) findViewById(R.id.reset_button);*/
-
         Intent intent = getIntent();
         IPAdress = intent.getStringExtra("ipAddress");
-       // ipAdd.setText(IPAdress);
-
-
-        //    stop.setEnabled(false);
         temp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

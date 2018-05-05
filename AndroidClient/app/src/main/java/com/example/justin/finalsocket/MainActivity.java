@@ -104,28 +104,8 @@ public class MainActivity extends AppCompatActivity {
 
                             }
                         });
-
-                        /*try {
-                            Log.e("", "trying fallback");
-                            mmSocket =(BluetoothSocket) mmDevice.getClass().getMethod("createRfcommSocket", new Class[] {int.class}).invoke(mmDevice,1);
-                            mmSocket.connect();
-                            Log.e("", "Connected");
-                        }
-                        catch (Exception e2){
-                            Log.e("", "Couldn't establish Bluetooth connection!");
-                            toastMsg("Couldn't establish Bluetooth connection!");
-                        }*/
                     }
                 }
-
-
-/*
-                if (mmOutputStream == null)
-                    try {
-                        mmOutputStream = mmSocket.getOutputStream();
-                    } catch (IOException e) {
-                        errorExit("Fatal Error", "In onResume(), input and output stream creation failed:" + e.getMessage() + ".");
-                    }*/
 
             } else {
                 if (mBluetoothAdapter != null) {
@@ -151,64 +131,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-       /* try {
-
-            mmSocket=createBluetoothSocket(mmDevice);
-            if(!mmSocket.isConnected()){
-                mmSocket.connect();
-            }
-            Log.e("","trying fallback...");
-        }catch (Exception e){
-            Log.e("","trying fallback...");
-        }*/
-
-       /* try {
-            mmSocket = mmDevice.createRfcommSocketToServiceRecord(uuid);
-        } catch (Exception e) {Log.e("","Error creating socket");}
-
-        try {
-            mmSocket.connect();
-            Log.e("","Connected");
-        } catch (IOException e) {
-            Log.e("",e.getMessage());
-            try {
-                Log.e("","trying fallback...");
-
-                mmSocket =(BluetoothSocket) mmDevice.getClass().getMethod("createRfcommSocket", new Class[] {int.class}).invoke(mmDevice,1);
-                mmSocket.connect();
-
-                Log.e("","Connected");
-            }
-            catch (Exception e2) {
-                Log.e("", "Couldn't establish Bluetooth connection!");
-            }
-        }*/
-
-   /* private BluetoothSocket createBluetoothSocket(BluetoothDevice device)
-            throws IOException {
-        UUID uuid = UUID.fromString("94f39d29-7d6d-437d-973b-fba39e49d4ee");
-        if(Build.VERSION.SDK_INT >= 10){
-            try {
-
-                final Method m = device.getClass().getMethod("createInsecureRfcommSocketToServiceRecord", new Class[] { UUID.class });
-                return (BluetoothSocket) m.invoke(device, uuid);
-            } catch (Exception e) {
-                Log.e("TAG", "Could not create Insecure RFComm Connection",e);
-            }
-        }
-        return  device.createRfcommSocketToServiceRecord(uuid);
-    }*/
-
     BluetoothAdapter mBluetoothAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //    final TextView myLabel = (TextView) findViewById(R.id.btResult);
-        //  final EditText editText = (EditText) findViewById(R.id.editText);
-        // Button tempButton =(Button) findViewById(R.id.tempButton);
-
         final AutoCompleteTextView at=(AutoCompleteTextView)findViewById(R.id.autodemo);
         at.setAdapter(new ArrayAdapter(this,android.R.layout.simple_list_item_1,names));
         at.setThreshold(1);
@@ -221,23 +149,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         final Handler handler = new Handler();
-
         final TextView myLabel = (TextView) findViewById(R.id.pi_response);
-  //      wifi =(TextView)findViewById(R.id.textView1);
-   //     pswd =(TextView)findViewById(R.id.textView2);
-
-   //     final EditText wifiInput = (EditText) findViewById(R.id.wifi_input);
         final EditText Password = (EditText) findViewById(R.id.wifi_password);
-
-     //   Password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-     //   Password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-     //   Password.setSelection(Password.length());
-
-
         Button keyButton = (Button) findViewById(R.id.key_button);
-
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
 
         final class workerThread implements Runnable {
 
@@ -257,11 +172,6 @@ public class MainActivity extends AppCompatActivity {
                         boolean workDone = false;
 
                         try {
-
-                      /*  if(mmSocket==null){
-                            return;
-                        } */
-
                             if (mmSocket != null) {
 
                                 final InputStream mmInputStream;
@@ -294,27 +204,12 @@ public class MainActivity extends AppCompatActivity {
                                             });
 
                                             workDone = true;
-/*
-
-                                        Intent intent = new Intent();
-                                        intent.setAction("com.example.justin.pratiksocket");
-                                        intent.putExtra("ipAddress", data);
-                                        startActivity(intent);
-*/
                                             String finalip = new String();
                                             finalip = data.substring(data.length() - (bytesAvailable - 1));
-                                       /*Intent intent1 = getPackageManager().getLaunchIntentForPackage("com.example.justin.pratiksocket");
-                                        intent1.putExtra("ipAddress", data);
-                                        startActivity(intent1);*/
-
                                             Intent intent1 = new Intent(MainActivity.this, MainActivity2.class);
                                             intent1.putExtra("ipAddress", finalip);
                                             startActivity(intent1);
-
-
                                             break;
-
-
                                         } else {
                                             readBuffer[readBufferPosition++] = b;
                                         }
@@ -337,8 +232,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
-        }
-        ;
+        };
 //        LoadPreferences();
 
 
@@ -360,7 +254,6 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Wifi Field Empty", Toast.LENGTH_SHORT).show();
                         }
                     });
-                    //wifiInput.setError("Input field require");
                 }
                 if (second.equals("")) {
                     Handler handler = new Handler(Looper.getMainLooper());
@@ -371,27 +264,12 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                     });
-
-                    //Password.setError("Input field require");
                 }
                 final String wp = first + "," + second;
                 (new Thread(new workerThread(wp))).start();
-           //    listItems.add(first);
-                // Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
-     //           finish();
             }
 
         });
-    /*   at.setAdapter(new ArrayAdapter(this,android.R.layout.simple_list_item_1,listItems));
-        at.setThreshold(1);
-        at.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView tv=(TextView)view;
-                Toast.makeText(MainActivity.this, tv.getText().toString(), Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
         if (!mBluetoothAdapter.isEnabled()) {
             Intent enableBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBluetooth, 0);
@@ -418,49 +296,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-  /*  private void LoadPreferences() {
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        String first = sharedPreferences.getString("Wifi Input", "");
-        String second = sharedPreferences.getString("Password", "");
-        wifi.setText(first);
-        pswd.setText(second);
-    }*/
- //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-  // SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-   /*     private void LoadPreferences(){
-            SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-            String strSavedMem1 = sharedPreferences.getString("MEM1", "");
-            String strSavedMem2 = sharedPreferences.getString("MEM2", "");
-            textSavedMem1.setText(strSavedMem1);
-            textSavedMem2.setText(strSavedMem2);
-        }*/
-   
-
-
-  /* @Override
-   public void onStop() {
-       super.onStop();
-   }
-
-
-       private void SavePreferences(String key, String value){
-           SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-           SharedPreferences.Editor editor = sharedPreferences.edit();
-           editor.putString(key, value);
-           editor.commit();
-       }*/
-
     public void toastMsg(String msg) {
         Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
 
     }
-
-  /*  @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }*/
-
 }
